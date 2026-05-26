@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-Content \"D:\\\\Downloads\\\\etm-landing \\(2\\).html\" -TotalCount 100)",
+      "PowerShell($content = Get-Content \"D:\\\\Downloads\\\\etm-landing \\(2\\).html\" -Raw; $lines = $content -split \"`n\"; Write-Output \"Total lines: $\\($lines.Count\\)\"; $bodyStart = \\($lines | Select-String \"<body\"\\).LineNumber; Write-Output \"Body starts at line: $bodyStart\")"
+    ]
+  }
+}
