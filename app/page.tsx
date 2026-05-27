@@ -33,7 +33,7 @@ const brands = ['Vaillant', 'Buderus', 'Grohe', 'Kermi', 'Roca', 'Rehau', 'Danfo
 
 const products = [
   {
-    badge: 'В наличии',
+    badge: 'Хит продаж',
     img: '/edisson-50.png',
     name: 'Водонагреватель Edisson 50 л',
     desc: 'Электрический накопительный. Объём 50 литров. Надёжный и экономичный — подходит для семьи из 2–3 человек.',
