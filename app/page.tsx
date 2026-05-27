@@ -27,7 +27,7 @@ const PHONE = '+79785623232'
 const PHONE_DISPLAY = '+7 978 562-32-32'
 const WA_URL = `https://wa.me/${PHONE}`
 const TG_URL = 'https://t.me/XXXXXXX'
-const MAX_URL = 'https://max.ru/XXXXXXX'
+const MAX_URL = 'https://max.ru/u/f9LHodD0cOJo41JUPgh8J_By2rnO8KkNawBUNBlsW5IYkABer3uiQLOy0vc'
 
 const brands = ['Vaillant', 'Buderus', 'Grohe', 'Kermi', 'Roca', 'Rehau', 'Danfoss', 'Wilo', 'Viessmann', 'Giacomini']
 
@@ -109,7 +109,10 @@ export default function Home() {
             </a>
             <a href={MAX_URL} target="_blank" rel="noopener noreferrer" className="btn btn-max">
               <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-3 12H7v-1.5h10V14zm0-3H7v-1.5h10V11zm-3.5-3h-3L12 6.5 13.5 8z" />
+                <path
+                  fillRule="evenodd"
+                  d="M5 2h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H9.5l-4 4 1-4H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3zM12 14.5a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9zm0-2.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"
+                />
               </svg>
               MAX
             </a>
