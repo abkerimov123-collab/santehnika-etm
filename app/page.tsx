@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import HeroCarousel from './HeroCarousel'
 
 const YandexMap = dynamic(() => import('./YandexMap'), { ssr: false })
 
@@ -75,7 +76,7 @@ export default function Home() {
 
       {/* HERO */}
       <section className="hero">
-        <div className="hero-bg" />
+        <HeroCarousel />
         <div className="hero-content">
           <div className="hero-label">Евпатория · сантехника и инженерные системы</div>
           <h1>
