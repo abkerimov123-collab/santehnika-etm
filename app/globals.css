@@ -420,11 +420,22 @@ h1 em {
   justify-content: space-between;
   gap: 8px;
 }
+.product-price-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
 .product-price {
   font-family: var(--font-unbounded), 'Unbounded', sans-serif;
   font-size: 13px;
   font-weight: 700;
   color: var(--white);
+}
+.product-old-price {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.3);
+  text-decoration: line-through;
 }
 .product-btn {
   font-size: 11px;

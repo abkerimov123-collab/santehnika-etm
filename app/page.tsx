@@ -42,10 +42,11 @@ const products = [
   {
     badge: 'Скидка',
     sale: true,
-    img: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=500&q=85&auto=format&fit=crop',
-    name: 'Радиатор отопления',
-    desc: 'Биметаллические и алюминиевые. Подберём секции под комнату.',
-    price: 'от 2 500 ₽',
+    img: '/shuft-09.png',
+    name: 'Сплит-система SHUFT 09',
+    desc: 'Настенная система охлаждения и обогрева. Для помещений до 25 м².',
+    price: '21 000 ₽',
+    oldPrice: '25 000 ₽',
   },
   {
     badge: 'В наличии',
@@ -138,7 +139,10 @@ export default function Home() {
                   <div className="product-name">{p.name}</div>
                   <div className="product-desc">{p.desc}</div>
                   <div className="product-price-row">
-                    <span className="product-price">{p.price}</span>
+                    <div className="product-price-group">
+                      <span className="product-price">{p.price}</span>
+                      {p.oldPrice && <span className="product-old-price">{p.oldPrice}</span>}
+                    </div>
                     <a href={`tel:${PHONE}`} className="product-btn">Позвонить</a>
                   </div>
                 </div>
