@@ -120,6 +120,34 @@ export default function Home() {
         </div>
       </section>
 
+      {/* PRODUCTS */}
+      <section className="products-section">
+        <div className="products-inner">
+          <div className="products-header">
+            <div className="section-label">Горячие позиции</div>
+            <a href={`tel:${PHONE}`} className="products-cta">Узнать наличие →</a>
+          </div>
+          <div className="products-grid">
+            {products.map((p) => (
+              <div className="product-card" key={p.name}>
+                <div className={`product-badge${p.sale ? ' product-badge--sale' : ''}`}>{p.badge}</div>
+                <div className="product-img-wrap">
+                  <img src={p.img} alt={p.name} loading="lazy" />
+                </div>
+                <div className="product-body">
+                  <div className="product-name">{p.name}</div>
+                  <div className="product-desc">{p.desc}</div>
+                  <div className="product-price-row">
+                    <span className="product-price">{p.price}</span>
+                    <a href={`tel:${PHONE}`} className="product-btn">Позвонить</a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <div className="divider" />
 
       {/* USP */}
@@ -149,34 +177,6 @@ export default function Home() {
               <li>Честные цены без навязывания</li>
               <li>Прозрачная смета с первого звонка</li>
             </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* PRODUCTS */}
-      <section className="products-section">
-        <div className="products-inner">
-          <div className="products-header">
-            <div className="section-label">Горячие позиции</div>
-            <a href={`tel:${PHONE}`} className="products-cta">Узнать наличие →</a>
-          </div>
-          <div className="products-grid">
-            {products.map((p) => (
-              <div className="product-card" key={p.name}>
-                <div className={`product-badge${p.sale ? ' product-badge--sale' : ''}`}>{p.badge}</div>
-                <div className="product-img-wrap">
-                  <img src={p.img} alt={p.name} loading="lazy" />
-                </div>
-                <div className="product-body">
-                  <div className="product-name">{p.name}</div>
-                  <div className="product-desc">{p.desc}</div>
-                  <div className="product-price-row">
-                    <span className="product-price">{p.price}</span>
-                    <a href={`tel:${PHONE}`} className="product-btn">Позвонить</a>
-                  </div>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>

@@ -385,7 +385,7 @@ h1 em {
   color: #f87171;
 }
 .product-img-wrap {
-  height: 180px;
+  height: 210px;
   overflow: hidden;
 }
 .product-img-wrap img {
@@ -399,20 +399,20 @@ h1 em {
   filter: brightness(0.85) saturate(0.85);
   transform: scale(1.04);
 }
-.product-body { padding: 18px 18px 20px; }
+.product-body { padding: 22px 20px 24px; }
 .product-name {
   font-family: var(--font-unbounded), 'Unbounded', sans-serif;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   color: var(--white);
 }
 .product-desc {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 300;
   color: rgba(255,255,255,0.42);
   line-height: 1.6;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 .product-price-row {
   display: flex;
