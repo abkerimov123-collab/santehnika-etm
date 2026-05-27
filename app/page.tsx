@@ -26,7 +26,7 @@ function LogoIcon({ size = 24 }: { size?: number }) {
 const PHONE = '+79785623232'
 const PHONE_DISPLAY = '+7 978 562-32-32'
 const WA_URL = `https://wa.me/${PHONE}`
-const TG_URL = 'https://t.me/XXXXXXX'
+const TG_URL = 'https://t.me/evpaterm'
 const MAX_URL = 'https://max.ru/u/f9LHodD0cOJo41JUPgh8J_By2rnO8KkNawBUNBlsW5IYkABer3uiQLOy0vc'
 
 const brands = ['Vaillant', 'Buderus', 'Grohe', 'Kermi', 'Roca', 'Rehau', 'Danfoss', 'Wilo', 'Viessmann', 'Giacomini']
