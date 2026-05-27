@@ -1,7 +1,26 @@
 import dynamic from 'next/dynamic'
-import Image from 'next/image'
 
 const YandexMap = dynamic(() => import('./YandexMap'), { ssr: false })
+
+function LogoIcon({ size = 24 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 32 32"
+      fill="none"
+      aria-hidden="true"
+      className="logo-icon"
+    >
+      {/* Top arc — clockwise from left-above to right-above, through top */}
+      <path d="M 6.6 12.58 A 10 10 0 0 1 25.4 12.58" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" />
+      <polygon points="25.4,12.58 25.72,8.20 22.34,9.44" fill="currentColor" />
+      {/* Bottom arc — clockwise from right-below to left-below, through bottom */}
+      <path d="M 25.4 19.42 A 10 10 0 0 1 6.6 19.42" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" />
+      <polygon points="6.6,19.42 6.28,23.80 9.66,22.56" fill="currentColor" />
+    </svg>
+  )
+}
 
 const PHONE = '+79785623232'
 const PHONE_DISPLAY = '+7 978 562-32-32'
@@ -49,7 +68,7 @@ export default function Home() {
       {/* HEADER */}
       <header>
         <a href="#" className="logo">
-          сантехника <span className="logo-dot" /> етм
+          сантехника <LogoIcon size={28} /> етм
         </a>
         <a href={`tel:${PHONE}`} className="header-phone">{PHONE_DISPLAY}</a>
       </header>
@@ -227,7 +246,9 @@ export default function Home() {
 
       {/* FOOTER */}
       <footer>
-        <div className="footer-copy">© 2026 сантехника • етм · Евпатория</div>
+        <div className="footer-copy">
+          © 2026 сантехника <LogoIcon size={14} /> етм · Евпатория
+        </div>
         <div className="footer-hours">Пн–Пт 9:00–18:00 · Сб 9:00–15:00</div>
       </footer>
     </>

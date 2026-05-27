@@ -3,8 +3,9 @@
 :root {
   --dark: #0D1B2A;
   --mid: #1a2d42;
+  --blue: #2A7BFF;
   --gray: #6B7280;
-  --light: #F5F6F7;
+  --light: #F1F3F5;
   --white: #ffffff;
 }
 
@@ -40,13 +41,20 @@ header {
   align-items: center;
   gap: 6px;
 }
-.logo-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--white);
+.logo-icon {
+  color: var(--blue);
   flex-shrink: 0;
+  display: block;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.logo:hover .logo-icon {
+  transform: rotate(180deg);
+}
+.footer-copy .logo-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 2px -1px;
+  opacity: 0.5;
 }
 .header-phone {
   font-size: 14px;
