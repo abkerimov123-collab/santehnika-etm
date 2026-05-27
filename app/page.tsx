@@ -33,11 +33,11 @@ const brands = ['Vaillant', 'Buderus', 'Grohe', 'Kermi', 'Roca', 'Rehau', 'Danfo
 
 const products = [
   {
-    badge: 'Хит',
-    img: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=500&q=85&auto=format&fit=crop',
-    name: 'Газовый котёл',
-    desc: 'Настенный, двухконтурный. Подбор по мощности под ваш объект.',
-    price: 'от 28 000 ₽',
+    badge: 'В наличии',
+    img: '/edisson-50.png',
+    name: 'Водонагреватель Edisson 50 л',
+    desc: 'Электрический накопительный. Объём 50 литров. Надёжный и экономичный — подходит для семьи из 2–3 человек.',
+    price: '7 140 ₽',
   },
   {
     badge: 'Скидка',
