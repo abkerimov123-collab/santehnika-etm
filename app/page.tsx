@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic'
 import HeroCarousel from './HeroCarousel'
 import ProductsSection from './ProductsSection'
 import ProjectsSection from './ProjectsSection'
+import CallButton from './CallButton'
 
 const YandexMap = dynamic(() => import('./YandexMap'), { ssr: false })
 const UspSection = dynamic(() => import('./UspSection'), { ssr: false })
@@ -175,6 +176,9 @@ export default function Home() {
           <YandexMap />
         </div>
       </section>
+
+      {/* CALL FAB */}
+      <CallButton />
 
       {/* FOOTER */}
       <footer>
