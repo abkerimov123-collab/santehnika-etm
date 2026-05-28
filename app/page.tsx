@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
-import Image from 'next/image'
 
 const YandexMap = dynamic(() => import('./YandexMap'), { ssr: false })
+const UspSection = dynamic(() => import('./UspSection'), { ssr: false })
 
 const PHONE = '+79785623232'
 const PHONE_DISPLAY = '+7 978 562-32-32'
@@ -92,37 +92,6 @@ export default function Home() {
 
       <div className="divider" />
 
-      {/* USP */}
-      <section className="usp">
-        <div className="usp-grid">
-          <div className="usp-item">
-            <span className="usp-icon">🔧</span>
-            <div className="usp-title">Отопление под ключ</div>
-            <div className="usp-text">Котлы, коллекторы, радиаторы, тёплый пол — подберём всю систему совместимо и в наличии.</div>
-          </div>
-          <div className="usp-item">
-            <span className="usp-icon">💧</span>
-            <div className="usp-title">Водоснабжение и канализация</div>
-            <div className="usp-text">Трубы, фитинги, насосы, арматура. Всё от проверенных брендов, без подделок.</div>
-          </div>
-          <div className="usp-item">
-            <span className="usp-icon">💬</span>
-            <div className="usp-title">Объясним и подберём</div>
-            <div className="usp-text">Скажите задачу — составим список. Монтажник не скажет «это не подходит».</div>
-          </div>
-          <div className="usp-item">
-            <span className="usp-icon">✅</span>
-            <div className="usp-title">Удобно работать</div>
-            <ul className="usp-bullets">
-              <li>Быстрая доставка по Евпатории</li>
-              <li>Гибкие условия для монтажников</li>
-              <li>Честные цены без навязывания</li>
-              <li>Прозрачная смета с первого звонка</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
       {/* PRODUCTS */}
       <section className="products-section">
         <div className="products-inner">
@@ -150,6 +119,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* USP */}
+      <UspSection />
 
       {/* BRANDS */}
       <section className="brands-section">
