@@ -1,47 +1,35 @@
 import dynamic from 'next/dynamic'
+import HeroCarousel from './HeroCarousel'
+import ProductsSection from './ProductsSection'
 
 const YandexMap = dynamic(() => import('./YandexMap'), { ssr: false })
 const UspSection = dynamic(() => import('./UspSection'), { ssr: false })
 
+function LogoIcon({ size = 24 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 32 32"
+      fill="none"
+      aria-hidden="true"
+      className="logo-icon"
+    >
+      <path d="M 6.6 12.58 A 10 10 0 0 1 25.4 12.58" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" />
+      <polygon points="25.4,12.58 25.72,8.20 22.34,9.44" fill="currentColor" />
+      <path d="M 25.4 19.42 A 10 10 0 0 1 6.6 19.42" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" />
+      <polygon points="6.6,19.42 6.28,23.80 9.66,22.56" fill="currentColor" />
+    </svg>
+  )
+}
+
 const PHONE = '+79785623232'
 const PHONE_DISPLAY = '+7 978 562-32-32'
 const WA_URL = `https://wa.me/${PHONE}`
-const TG_URL = 'https://t.me/XXXXXXX'
+const TG_URL = 'https://t.me/evpaterm'
+const MAX_URL = 'https://max.ru/u/f9LHodD0cOJo41JUPgh8J_By2rnO8KkNawBUNBlsW5IYkABer3uiQLOy0vc'
 
 const brands = ['Vaillant', 'Buderus', 'Grohe', 'Kermi', 'Roca', 'Rehau', 'Danfoss', 'Wilo', 'Viessmann', 'Giacomini']
-
-const products = [
-  {
-    badge: 'Хит',
-    img: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=500&q=85&auto=format&fit=crop',
-    name: 'Газовый котёл',
-    desc: 'Настенный, двухконтурный. Подбор по мощности под ваш объект.',
-    price: 'от 28 000 ₽',
-  },
-  {
-    badge: 'Скидка',
-    sale: true,
-    img: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=500&q=85&auto=format&fit=crop',
-    name: 'Радиатор отопления',
-    desc: 'Биметаллические и алюминиевые. Подберём секции под комнату.',
-    price: 'от 2 500 ₽',
-  },
-  {
-    badge: 'В наличии',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=85&auto=format&fit=crop',
-    name: 'Водонагреватель',
-    desc: 'Накопительные и проточные. 30–200 литров. Установка под ключ.',
-    price: 'от 8 000 ₽',
-  },
-  {
-    badge: 'Скидка',
-    sale: true,
-    img: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=500&q=85&auto=format&fit=crop',
-    name: 'Коллектор тёплого пола',
-    desc: 'Нержавеющая сталь. Комплект под любое количество контуров.',
-    price: 'от 6 500 ₽',
-  },
-]
 
 export default function Home() {
   return (
@@ -49,14 +37,14 @@ export default function Home() {
       {/* HEADER */}
       <header>
         <a href="#" className="logo">
-          сантехника <span className="logo-dot" /> етм
+          сантехника <LogoIcon size={28} /> етм
         </a>
         <a href={`tel:${PHONE}`} className="header-phone">{PHONE_DISPLAY}</a>
       </header>
 
       {/* HERO */}
       <section className="hero">
-        <div className="hero-bg" />
+        <HeroCarousel />
         <div className="hero-content">
           <div className="hero-label">Евпатория · сантехника и инженерные системы</div>
           <h1>
@@ -86,39 +74,23 @@ export default function Home() {
               </svg>
               Telegram
             </a>
+            <a href={MAX_URL} target="_blank" rel="noopener noreferrer" className="btn btn-max">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  fillRule="evenodd"
+                  d="M5 2h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H9.5l-4 4 1-4H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3zM12 14.5a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9zm0-2.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"
+                />
+              </svg>
+              MAX
+            </a>
           </div>
         </div>
       </section>
-
-      <div className="divider" />
 
       {/* PRODUCTS */}
-      <section className="products-section">
-        <div className="products-inner">
-          <div className="products-header">
-            <div className="section-label">Горячие позиции</div>
-            <a href={`tel:${PHONE}`} className="products-cta">Узнать наличие →</a>
-          </div>
-          <div className="products-grid">
-            {products.map((p) => (
-              <div className="product-card" key={p.name}>
-                <div className={`product-badge${p.sale ? ' product-badge--sale' : ''}`}>{p.badge}</div>
-                <div className="product-img-wrap">
-                  <img src={p.img} alt={p.name} loading="lazy" />
-                </div>
-                <div className="product-body">
-                  <div className="product-name">{p.name}</div>
-                  <div className="product-desc">{p.desc}</div>
-                  <div className="product-price-row">
-                    <span className="product-price">{p.price}</span>
-                    <a href={`tel:${PHONE}`} className="product-btn">Позвонить</a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ProductsSection phone={PHONE} />
+
+      <div className="divider" />
 
       {/* USP */}
       <UspSection />
@@ -199,7 +171,9 @@ export default function Home() {
 
       {/* FOOTER */}
       <footer>
-        <div className="footer-copy">© 2026 сантехника • етм · Евпатория</div>
+        <div className="footer-copy">
+          © 2026 сантехника <LogoIcon size={14} /> етм · Евпатория
+        </div>
         <div className="footer-hours">Пн–Пт 9:00–18:00 · Сб 9:00–15:00</div>
       </footer>
     </>
