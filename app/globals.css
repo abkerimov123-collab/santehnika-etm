@@ -1012,96 +1012,6 @@ h1 em { font-style: normal; color: rgba(255,255,255,0.28); }
 }
 .modal-close:hover { background: rgba(255,255,255,0.15); color: var(--white); }
 
-/* TRUST / НАМ ДОВЕРЯЮТ */
-.trust-section {
-  padding: 72px 0 0;
-  background: #0b1826;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  overflow: hidden;
-}
-.trust-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 48px 56px;
-}
-.trust-header {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 48px;
-  align-items: start;
-  margin-bottom: 40px;
-}
-.trust-title {
-  font-family: var(--font-unbounded), 'Unbounded', sans-serif;
-  font-size: clamp(22px, 2.8vw, 36px);
-  font-weight: 800;
-  line-height: 1.18;
-  letter-spacing: -0.03em;
-  color: var(--white);
-  margin-bottom: 16px;
-}
-.trust-subtitle {
-  font-size: 15px;
-  font-weight: 300;
-  color: rgba(255,255,255,0.45);
-  line-height: 1.7;
-  max-width: 480px;
-}
-.trust-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  flex-shrink: 0;
-  align-self: center;
-}
-.trust-stat-item {
-  text-align: right;
-  border-right: 2px solid rgba(100,160,255,0.25);
-  padding-right: 20px;
-}
-.trust-stat-value {
-  display: block;
-  font-family: var(--font-unbounded), 'Unbounded', sans-serif;
-  font-size: clamp(18px, 2vw, 26px);
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  color: var(--white);
-  line-height: 1.1;
-  margin-bottom: 4px;
-}
-.trust-stat-label {
-  display: block;
-  font-size: 12px;
-  font-weight: 400;
-  color: rgba(255,255,255,0.35);
-  line-height: 1.4;
-}
-.trust-brands-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.trust-brand-chip {
-  font-family: var(--font-unbounded), 'Unbounded', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: rgba(255,255,255,0.55);
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 8px;
-  padding: 12px 22px;
-  transition: all 0.22s;
-  cursor: default;
-}
-.trust-brand-chip:hover {
-  color: rgba(255,255,255,0.9);
-  background: rgba(80,140,220,0.1);
-  border-color: rgba(80,140,220,0.28);
-  transform: translateY(-2px);
-}
-
 /* BRANDS CAROUSEL */
 .brands-section { padding: 0 0 64px; overflow: hidden; }
 .brands-track-wrap {
@@ -1181,15 +1091,6 @@ h1          { animation: fadeUp 0.55s 0.1s ease both; }
 .cta-group  { animation: fadeUp 0.55s 0.3s ease both; }
 
 /* MOBILE */
-@media (max-width: 900px) {
-  .trust-header { grid-template-columns: 1fr; gap: 32px; }
-  .trust-stats { flex-direction: row; flex-wrap: wrap; gap: 16px; }
-  .trust-stat-item { text-align: left; border-right: none; border-left: 2px solid rgba(100,160,255,0.25); padding-right: 0; padding-left: 16px; }
-}
-@media (max-width: 700px) {
-  .trust-inner { padding-left: 24px; padding-right: 24px; }
-  .trust-section { padding-top: 48px; }
-}
 @media (max-width: 900px) {
   .usp2-grid { grid-template-columns: 1fr 1fr; }
   .usp2-stats { grid-template-columns: 1fr 1fr; }

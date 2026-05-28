@@ -99,39 +99,10 @@ export default function Home() {
       {/* CLIENTS + PROJECTS */}
       <ProjectsSection />
 
-      {/* BRANDS / НАМ ДОВЕРЯЮТ */}
-      <section className="trust-section">
-        <div className="trust-inner">
-          <div className="trust-header">
-            <div className="trust-header-left">
-              <div className="section-label" style={{ marginBottom: '14px' }}>Нам доверяют</div>
-              <h2 className="trust-title">Проверенные бренды.<br />Надёжное оборудование.</h2>
-              <p className="trust-subtitle">
-                Работаем только с официально поставляемым оборудованием. Каждая позиция — с гарантией производителя и сертификатами. Никакого контрафакта.
-              </p>
-            </div>
-            <div className="trust-stats">
-              <div className="trust-stat-item">
-                <span className="trust-stat-value">12+</span>
-                <span className="trust-stat-label">брендов в наличии</span>
-              </div>
-              <div className="trust-stat-item">
-                <span className="trust-stat-value">100%</span>
-                <span className="trust-stat-label">сертифицированный товар</span>
-              </div>
-              <div className="trust-stat-item">
-                <span className="trust-stat-value">до 5 лет</span>
-                <span className="trust-stat-label">гарантия на оборудование</span>
-              </div>
-            </div>
-          </div>
-          <div className="trust-brands-grid">
-            {brands.map((b) => (
-              <div key={b} className="trust-brand-chip">{b}</div>
-            ))}
-          </div>
-        </div>
-        <div className="brands-track-wrap" style={{ marginTop: '32px' }}>
+      {/* BRANDS */}
+      <section className="brands-section">
+        <div className="section-label" style={{ padding: '0 48px', marginBottom: '24px' }}>Работаем с брендами</div>
+        <div className="brands-track-wrap">
           <div className="brands-track">
             {[...brands, ...brands].map((b, i) => (
               <span key={i}>
