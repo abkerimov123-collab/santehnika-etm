@@ -101,7 +101,10 @@ export default function Home() {
 
       {/* BRANDS */}
       <section className="brands-section">
-        <div className="section-label" style={{ padding: '0 48px', marginBottom: '24px' }}>Работаем с брендами</div>
+        <div style={{ padding: '0 48px', marginBottom: '10px' }}>
+          <div className="section-label" style={{ marginBottom: '6px' }}>Нам доверяют</div>
+          <p className="brands-tagline">Работаем с проверенными брендами и реализуем проекты любой сложности</p>
+        </div>
         <div className="brands-track-wrap">
           <div className="brands-track">
             {[...brands, ...brands].map((b, i) => (

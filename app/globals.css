@@ -1013,7 +1013,14 @@ h1 em { font-style: normal; color: rgba(255,255,255,0.28); }
 .modal-close:hover { background: rgba(255,255,255,0.15); color: var(--white); }
 
 /* BRANDS CAROUSEL */
-.brands-section { padding: 0 0 64px; overflow: hidden; }
+.brands-section { padding: 56px 0 72px; overflow: hidden; }
+.brands-tagline {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.5;
+  margin-bottom: 28px;
+}
 .brands-track-wrap {
   overflow: hidden;
   mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
