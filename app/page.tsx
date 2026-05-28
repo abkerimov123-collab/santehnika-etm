@@ -3,6 +3,7 @@ import HeroCarousel from './HeroCarousel'
 import ProductsSection from './ProductsSection'
 import ProjectsSection from './ProjectsSection'
 import CallButton from './CallButton'
+import HeaderPhoneButton from './HeaderPhoneButton'
 
 const YandexMap = dynamic(() => import('./YandexMap'), { ssr: false })
 const UspSection = dynamic(() => import('./UspSection'), { ssr: false })
@@ -41,7 +42,7 @@ export default function Home() {
         <a href="#" className="logo">
           сантехника <LogoIcon size={28} /> етм
         </a>
-        <a href={`tel:${PHONE}`} className="header-phone">{PHONE_DISPLAY}</a>
+        <HeaderPhoneButton phone={PHONE} phoneDisplay={PHONE_DISPLAY} />
       </header>
 
       {/* HERO */}
