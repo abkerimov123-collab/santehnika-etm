@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
 import HeroCarousel from './HeroCarousel'
 import ProductsSection from './ProductsSection'
+import ProjectsSection from './ProjectsSection'
 
 const YandexMap = dynamic(() => import('./YandexMap'), { ssr: false })
 const UspSection = dynamic(() => import('./UspSection'), { ssr: false })
@@ -29,7 +30,7 @@ const WA_URL = `https://wa.me/${PHONE}`
 const TG_URL = 'https://t.me/evpaterm'
 const MAX_URL = 'https://max.ru/u/f9LHodD0cOJo41JUPgh8J_By2rnO8KkNawBUNBlsW5IYkABer3uiQLOy0vc'
 
-const brands = ['Vaillant', 'Buderus', 'Grohe', 'Kermi', 'Roca', 'Rehau', 'Danfoss', 'Wilo', 'Viessmann', 'Giacomini']
+const brands = ['Vaillant', 'Buderus', 'Grohe', 'Kermi', 'Roca', 'Rehau', 'Danfoss', 'Wilo', 'Viessmann', 'Giacomini', 'Теплосервис', 'СИАН']
 
 export default function Home() {
   return (
@@ -94,6 +95,9 @@ export default function Home() {
 
       {/* USP */}
       <UspSection />
+
+      {/* CLIENTS + PROJECTS */}
+      <ProjectsSection />
 
       {/* BRANDS */}
       <section className="brands-section">
