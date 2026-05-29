@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import Image from 'next/image'
 import ProductModal, { Product } from './ProductModal'
 import CallbackModal from './CallbackModal'
 
@@ -80,7 +81,7 @@ export default function ProductsSection() {
               >
                 <div className={`product-badge${p.sale ? ' product-badge--sale' : ''}`}>{p.badge}</div>
                 <div className="product-img-wrap">
-                  <img src={p.img} alt={p.name} loading="lazy" />
+                  <Image src={p.img} alt={p.name} fill sizes="(max-width: 480px) 100vw, (max-width: 700px) 50vw, 25vw" style={{ objectFit: 'cover' }} />
                 </div>
                 <div className="product-body">
                   <div className="product-name">{p.name}</div>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 const slides = [
   { src: '/hero-1.png', pos: 'center' },
@@ -23,12 +24,17 @@ export default function HeroCarousel() {
         <div
           key={slide.src}
           className="hero-slide"
-          style={{
-            backgroundImage: `url(${slide.src})`,
-            backgroundPosition: slide.pos,
-            opacity: i === current ? 1 : 0,
-          }}
-        />
+          style={{ opacity: i === current ? 1 : 0 }}
+        >
+          <Image
+            src={slide.src}
+            alt=""
+            fill
+            priority={i === 0}
+            sizes="100vw"
+            style={{ objectFit: 'cover', objectPosition: slide.pos }}
+          />
+        </div>
       ))}
       <div className="hero-overlay" />
       <div className="carousel-dots">

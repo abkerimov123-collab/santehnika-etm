@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
+import Image from 'next/image'
 
 interface ClientCard {
   id: number
@@ -370,7 +371,7 @@ export default function ProjectsSection() {
                       style={{ background: card.bgColor, color: card.textColor }}
                     >
                       {card.logo
-                        ? <img src={card.logo} alt={card.name} className="client-logo-img" />
+                        ? <Image src={card.logo} alt={card.name} fill sizes="(max-width: 480px) 50vw, (max-width: 700px) 33vw, 20vw" style={{ objectFit: 'contain' }} />
                         : <span className="client-logo-initials">{card.initials}</span>
                       }
                     </div>
@@ -445,7 +446,7 @@ export default function ProjectsSection() {
                 <div className="usp-modal-imgs client-card-modal-left" style={{ background: modal.card.bgColor }}>
                   <div className="client-card-modal-logo" style={{ color: modal.card.textColor }}>
                     {modal.card.logo
-                      ? <img src={modal.card.logo} alt={modal.card.name} className="client-card-modal-logo-img" />
+                      ? <Image src={modal.card.logo} alt={modal.card.name} width={90} height={90} style={{ objectFit: 'contain' }} className="client-card-modal-logo-img" />
                       : <span className="client-card-modal-initials">{modal.card.initials}</span>
                     }
                     <span className="client-card-modal-name">{modal.card.name}</span>

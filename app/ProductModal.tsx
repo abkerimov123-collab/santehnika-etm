@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 import CallbackModal from './CallbackModal'
 
 const PHONE = '+79785623232'
@@ -48,7 +49,7 @@ export default function ProductModal({ product, onClose }: Props) {
         <div className="modal-dialog" onClick={e => e.stopPropagation()}>
           <button className="modal-close" onClick={onClose} aria-label="Закрыть">×</button>
           <div className="modal-img-wrap">
-            <img src={product.img} alt={product.name} className="modal-img" />
+            <Image src={product.img} alt={product.name} fill className="modal-img" style={{ objectFit: 'cover' }} />
           </div>
           <div className="modal-body">
             <div className={`product-badge${product.sale ? ' product-badge--sale' : ''} modal-badge`}>
