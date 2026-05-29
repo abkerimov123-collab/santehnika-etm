@@ -136,16 +136,16 @@ export default function CallbackModal({ open, phone, phoneDisplay, onClose }: Pr
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
                 <div>
                   <div className="cm-info-label">Работаем ежедневно</div>
-                  <div className="cm-info-val">Пн–Пт 9:00–18:00<br />Сб 9:00–15:00</div>
+                  <div className="cm-info-val">Пн–Пт 8:00–17:00<br />Сб 8:00–15:00</div>
                 </div>
               </div>
-              <div className="cm-info-item">
+              <a className="cm-info-item cm-info-item--link" href="https://yandex.com/maps/-/CPHKZN13" target="_blank" rel="noopener noreferrer">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
                 <div>
                   <div className="cm-info-label">Евпатория</div>
-                  <div className="cm-info-val">Интернациональная ул., 134, корп. 1</div>
+                  <div className="cm-info-val cm-info-val--map">Интернациональная ул., 134, корп. 1&nbsp;↗</div>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
 

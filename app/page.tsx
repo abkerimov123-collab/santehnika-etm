@@ -132,8 +132,8 @@ export default function Home() {
             <div className="statement-city">Евпатория</div>
             <div className="statement-addr">
               Интернациональная ул., 134, корп. 3<br />
-              Пн–Пт 9:00–18:00<br />
-              Сб 9:00–15:00
+              Пн–Пт 8:00–17:00<br />
+              Сб 8:00–15:00
             </div>
           </div>
         </div>
@@ -186,7 +186,7 @@ export default function Home() {
         <div className="footer-copy">
           © 2026 сантехника <LogoIcon size={14} /> етм · Евпатория
         </div>
-        <div className="footer-hours">Пн–Пт 9:00–18:00 · Сб 9:00–15:00</div>
+        <div className="footer-hours">Пн–Пт 8:00–17:00 · Сб 8:00–15:00</div>
       </footer>
     </>
   )
