@@ -823,6 +823,17 @@ h1 em { font-style: normal; color: rgba(255,255,255,0.28); }
   transform: translateY(-5px);
   box-shadow: 0 14px 32px rgba(0,0,0,0.24);
 }
+.client-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.client-card-modal-logo-img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  margin-bottom: 4px;
+}
 .client-logo-initials {
   font-family: var(--font-unbounded), 'Unbounded', sans-serif;
   font-size: 26px;
