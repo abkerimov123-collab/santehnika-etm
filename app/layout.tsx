@@ -19,6 +19,10 @@ const onest = Onest({
 export const metadata: Metadata = {
   title: 'сантехника • етм — инженерные решения для дома и бизнеса',
   description: 'Магазин сантехники в Евпатории. Подберём всё для ремонта без ошибок. Звоните — объясним простым языком.',
+  icons: {
+    icon: '/icon.png',
+    apple: '/icon.png',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
