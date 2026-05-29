@@ -149,7 +149,7 @@ export default function Home() {
             </svg>
             ВКонтакте
           </a>
-          <a href="https://www.avito.ru/XXXXXXX" target="_blank" rel="noopener noreferrer" className="social-link">
+          <a href="https://www.avito.ru/brands/etm" target="_blank" rel="noopener noreferrer" className="social-link">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M13.818 6.516a2.17 2.17 0 1 0 4.34 0 2.17 2.17 0 0 0-4.34 0zM7.698 4.347a2.17 2.17 0 1 0 0 4.34 2.17 2.17 0 0 0 0-4.34zm0 6.51A4.34 4.34 0 0 0 3.36 15.2a4.34 4.34 0 0 0 4.34 4.34 4.34 4.34 0 0 0 4.34-4.34 4.34 4.34 0 0 0-4.34-4.343zm0 6.51a2.17 2.17 0 0 1 0-4.34 2.17 2.17 0 0 1 0 4.34zM15.99 10.86a4.34 4.34 0 0 0-4.34 4.34 4.34 4.34 0 0 0 4.34 4.34 4.34 4.34 0 0 0 4.34-4.34 4.34 4.34 0 0 0-4.34-4.34zm0 6.51a2.17 2.17 0 0 1 0-4.34 2.17 2.17 0 0 1 0 4.34z" />
             </svg>
