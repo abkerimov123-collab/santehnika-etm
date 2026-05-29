@@ -91,7 +91,7 @@ export default function Home() {
       </section>
 
       {/* PRODUCTS */}
-      <ProductsSection phone={PHONE} />
+      <ProductsSection />
 
       <div className="divider" />
 

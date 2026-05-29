@@ -58,6 +58,13 @@ const MAX_URL = 'https://max.ru/u/...'
 
 `['Vaillant', 'Buderus', 'Grohe', 'Kermi', 'Roca', 'Rehau', 'Danfoss', 'Wilo', 'Viessmann', 'Giacomini', 'Теплосервис', 'СИАН']`
 
+## Домены
+
+- **Основной (canonical):** `сантехника-етм.рф` (punycode: `xn----7sbatcpotcb4boh9a.xn--p1ai`)
+- Подключён через Vercel → Settings → Domains, A-запись `216.198.79.1` на рег.ру
+- Планируется добавить латинский домен как алиас (не canonical)
+- Аналитика подключается после того как домен полностью заработает
+
 ## Что уже реализовано
 
 - Hero с каруселью и блоком CTA (звонок, WhatsApp, Telegram, MAX)
@@ -81,7 +88,9 @@ const MAX_URL = 'https://max.ru/u/...'
 
 ## HeaderPhoneButton — кнопка в хедере
 
-`app/HeaderPhoneButton.tsx` — та же логика мобайл/десктоп, но рендерит кнопку хедера (зелёная рамка с glow). Десктоп открывает `CallbackModal`.
+`app/HeaderPhoneButton.tsx` — рендерит кнопку хедера (зелёная рамка с glow). Всегда открывает `CallbackModal` по клику (мобайл и десктоп).
+
+**Мобильная адаптация (≤700px):** кнопка компактная — скрыты лейбл «Позвонить нам» и разделитель, остаётся только иконка + номер телефона в одну строку с `white-space: nowrap`. Стили в `globals.css` в блоке `@media (max-width: 700px)`.
 
 ## CallbackModal — общая модалка
 

@@ -1,6 +1,10 @@
 'use client'
 import { useState } from 'react'
 import ProductModal, { Product } from './ProductModal'
+import CallbackModal from './CallbackModal'
+
+const PHONE = '+79785623232'
+const PHONE_DISPLAY = '+7 978 562-32-32'
 
 const products: Product[] = [
   {
@@ -52,8 +56,9 @@ const products: Product[] = [
   },
 ]
 
-export default function ProductsSection({ phone }: { phone: string }) {
+export default function ProductsSection() {
   const [selected, setSelected] = useState<Product | null>(null)
+  const [callbackOpen, setCallbackOpen] = useState(false)
 
   return (
     <>
@@ -61,7 +66,7 @@ export default function ProductsSection({ phone }: { phone: string }) {
         <div className="products-inner">
           <div className="products-header">
             <div className="section-label">Горячие позиции</div>
-            <a href={`tel:${phone}`} className="products-cta">Узнать наличие →</a>
+            <button className="products-cta" onClick={() => setCallbackOpen(true)}>Узнать наличие →</button>
           </div>
           <div className="products-grid">
             {products.map((p) => (
@@ -93,7 +98,13 @@ export default function ProductsSection({ phone }: { phone: string }) {
           </div>
         </div>
       </section>
-      <ProductModal product={selected} phone={phone} onClose={() => setSelected(null)} />
+      <ProductModal product={selected} onClose={() => setSelected(null)} />
+      <CallbackModal
+        open={callbackOpen}
+        phone={PHONE}
+        phoneDisplay={PHONE_DISPLAY}
+        onClose={() => setCallbackOpen(false)}
+      />
     </>
   )
 }

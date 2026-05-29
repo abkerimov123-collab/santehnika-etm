@@ -1,121 +1,175 @@
 'use client'
-import { useState, useRef } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
-interface Project {
+interface ClientCard {
   id: number
+  name: string
   category: string
-  image: string
-  title: string
-  desc: string
-  location: string
-  images: string[]
-  works: string[]
+  initials: string
+  bgColor: string
+  textColor: string
+  modal: {
+    subtitle: string
+    points: string[]
+  }
 }
 
-const projects: Project[] = [
+const clientCards: ClientCard[] = [
   {
     id: 1,
-    category: 'Застройщик СИАН',
-    image: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80&auto=format&fit=crop',
-    title: 'ЖК «Новый берег»',
-    desc: 'Комплексная поставка инженерных систем для многоквартирного дома.',
-    location: 'г. Евпатория',
-    images: [
-      'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=85&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=900&q=85&auto=format&fit=crop',
-    ],
-    works: [
-      'Поставка котлового оборудования Vaillant на всю очередь строительства',
-      'Система отопления — коллекторная разводка по всем секциям',
-      'Горячее водоснабжение с циркуляционными насосами Wilo',
-      'Тёплый пол в квартирах на первых двух этажах — трубы Rehau',
-    ],
+    name: 'Теплосервис',
+    category: 'Обслуживание систем',
+    initials: 'ТС',
+    bgColor: '#E3F0FF',
+    textColor: '#1565C0',
+    modal: {
+      subtitle: 'Партнёрство с Теплосервисом',
+      points: [
+        'Поставка котлов Vaillant и Buderus для обслуживаемых объектов Евпатории',
+        'Запасные части и расходники всегда в наличии — бригады выезжают без ожидания',
+        'Совместная работа на объектах ЖКХ более 8 лет',
+        'Оперативная отгрузка для аварийных выездов в течение часа',
+        'Гарантийное сопровождение на всё поставляемое оборудование',
+      ],
+    },
   },
   {
     id: 2,
-    category: 'Застройщик СИАН',
-    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80&auto=format&fit=crop',
-    title: 'ЖК «Солнечный»',
-    desc: 'Отопление, водоснабжение и тёплый пол под ключ.',
-    location: 'г. Евпатория',
-    images: [
-      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&q=85&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1581092335397-9583eb92d232?w=900&q=85&auto=format&fit=crop',
-    ],
-    works: [
-      'Поставка радиаторов Kermi на 120 квартир',
-      'Трубная разводка из армированного полипропилена Rehau',
-      'Коллекторные шкафы Giacomini для поквартирного учёта',
-      'Узлы ввода с балансировочной арматурой Danfoss',
-    ],
+    name: 'СИАН ГК',
+    category: 'Застройщик',
+    initials: 'СГ',
+    bgColor: '#E8F5E9',
+    textColor: '#2E7D32',
+    modal: {
+      subtitle: 'Комплексные поставки для СИАН',
+      points: [
+        'Поставка инженерных систем для всей очереди строительства ЖК «Новый берег», «Солнечный», «Крымский дворик»',
+        'Резервирование товара под график строительства — поставки точно в срок',
+        'Котловое оборудование, радиаторы, трубы, коллекторы — единый поставщик',
+        'Вся исполнительная документация и сертификаты в одном пакете',
+        'Гибкие условия оплаты для крупных объёмов строительства',
+      ],
+    },
   },
   {
     id: 3,
-    category: 'Застройщик СИАН',
-    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80&auto=format&fit=crop',
-    title: 'ЖК «Крымский дворик»',
-    desc: 'Поставка сантехники и инженерного оборудования для жилого комплекса.',
-    location: 'г. Евпатория',
-    images: [
-      'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=900&q=85&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=900&q=85&auto=format&fit=crop',
-    ],
-    works: [
-      'Поставка котлов Buderus для крышной котельной комплекса',
-      'Система ХВС и ГВС — трубы и фитинги Rehau',
-      'Запорная арматура и коллекторы GROHE',
-      'Насосные группы и расширительные баки Wilo',
-    ],
+    name: 'Озеро Сновидений',
+    category: 'Гостиница',
+    initials: 'ОС',
+    bgColor: '#E1F5FE',
+    textColor: '#0277BD',
+    modal: {
+      subtitle: 'Сотрудничество с отелем',
+      points: [
+        'Поставка систем горячего водоснабжения с бойлерами косвенного нагрева',
+        'Насосные группы Wilo для бесперебойной подачи воды в номера',
+        'Сантехника GROHE для санузлов — надёжность, подтверждённая годами',
+        'Оперативная замена оборудования при аварии — без остановки гостиницы',
+        'Регулярное консультирование по снижению затрат на ГВС',
+      ],
+    },
   },
   {
     id: 4,
-    category: 'Детский сад',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&auto=format&fit=crop',
-    title: 'Детский сад, г. Евпатория',
-    desc: 'Комплексные работы: отопление, водоснабжение, канализация.',
-    location: 'г. Евпатория',
-    images: [
-      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=85&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1581092335397-9583eb92d232?w=900&q=85&auto=format&fit=crop',
-    ],
-    works: [
-      'Полная замена системы отопления — котёл Buderus + радиаторы',
-      'Прокладка водопровода из полипропилена REHAU',
-      'Монтаж канализации — внутренние и наружные сети',
-      'Установка санузлов и умывальников GROHE',
-    ],
+    name: 'ТЭС Отель',
+    category: 'Гостиничный комплекс',
+    initials: 'ТЭС',
+    bgColor: '#FFF8E1',
+    textColor: '#F57F17',
+    modal: {
+      subtitle: 'Инженерные системы для ТЭС Отеля',
+      points: [
+        'Комплектация котельной: котлы Buderus, расширительные баки, насосы Wilo',
+        'Система отопления по всему комплексу — коллекторная разводка',
+        'Тёплые полы в зонах SPA и бассейна — трубы Rehau под ключ',
+        'Запорная арматура Giacomini для поквартирного учёта расхода',
+        'Приоритетная поддержка в высокий туристический сезон',
+      ],
+    },
   },
   {
     id: 5,
-    category: 'Частный дом',
-    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80&auto=format&fit=crop',
-    title: 'Частный дом, п. Заозёрное',
-    desc: 'Котельная, тёплый пол, водоснабжение под ключ.',
-    location: 'п. Заозёрное',
-    images: [
-      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=85&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=900&q=85&auto=format&fit=crop',
-    ],
-    works: [
-      'Котельная под ключ — котёл Vaillant + бойлер косвенного нагрева',
-      'Тёплый пол 180 м² — коллекторная разводка Giacomini',
-      'Система водоснабжения из скважины с накопительным баком',
-      'Радиаторное отопление второго этажа — Kermi',
-    ],
+    name: 'УК «Престиж»',
+    category: 'Управляющая компания',
+    initials: 'УКП',
+    bgColor: '#F3E5F5',
+    textColor: '#6A1B9A',
+    modal: {
+      subtitle: 'Партнёрство с УК Престиж',
+      points: [
+        'Обслуживание жилых домов Евпатории — поставка материалов для текущего ремонта',
+        'Аварийный склад запчастей под объекты управляющей компании',
+        'Радиаторы Kermi, трубы, фитинги — весь спектр для замены',
+        'Быстрое оформление документов для отчётности УК',
+        'Партнёрские условия — экономия бюджета на плановых закупках',
+      ],
+    },
+  },
+  {
+    id: 6,
+    name: 'УК «Комфорт»',
+    category: 'Управляющая компания',
+    initials: 'УКК',
+    bgColor: '#E0F7FA',
+    textColor: '#00695C',
+    modal: {
+      subtitle: 'Партнёрство с УК Комфорт',
+      points: [
+        'Поставка сантехники и инженерных материалов для обслуживаемых домов',
+        'Оперативная комплектация при аварийных заявках жильцов',
+        'Счётчики воды, запорная арматура, фитинги — всё в наличии',
+        'Совместная работа по профилактике аварий отопительного сезона',
+        'Оформление документов и актов приёмки в день отгрузки',
+      ],
+    },
+  },
+  {
+    id: 7,
+    name: 'Отель «кИМперия»',
+    category: 'Санаторно-гостиничный комплекс',
+    initials: 'КИМ',
+    bgColor: '#FBE9E7',
+    textColor: '#BF360C',
+    modal: {
+      subtitle: 'Инженерия для отеля кИМперия',
+      points: [
+        'Поставка котельного оборудования Vaillant для комплекса',
+        'Система горячего водоснабжения — бойлеры и насосные группы',
+        'Сантехника GROHE и Roca для номеров и общественных зон',
+        'Теплообменники и узлы учёта тепловой энергии',
+        'Техническое сопровождение в межсезонный период',
+      ],
+    },
+  },
+  {
+    id: 8,
+    name: 'Евпатория Строй',
+    category: 'Строительная компания',
+    initials: 'ЕС',
+    bgColor: '#ECEFF1',
+    textColor: '#37474F',
+    modal: {
+      subtitle: 'Поставки для Евпатория Строй',
+      points: [
+        'Комплектация объектов жилого и коммерческого строительства',
+        'Системы отопления под ключ — от котла до последнего радиатора',
+        'Трубы, фитинги, коллекторы Rehau и Giacomini в одной накладной',
+        'Резервирование и поэтапная отгрузка под строительный график',
+        'Вся техническая документация для сдачи объекта надзорным органам',
+      ],
+    },
   },
 ]
-
-interface ClientModal {
-  subtitle: string
-  image: string
-  points: string[]
-}
 
 interface ClientType {
   icon: React.ReactNode
   title: string
   desc: string
-  modal: ClientModal
+  modal: {
+    subtitle: string
+    image: string
+    points: string[]
+  }
 }
 
 const clientTypes: ClientType[] = [
@@ -201,33 +255,40 @@ const clientTypes: ClientType[] = [
   },
 ]
 
-type ModalMode = { kind: 'all' } | { kind: 'project'; project: Project } | { kind: 'client'; client: ClientType }
+type ModalMode =
+  | { kind: 'clienttype'; client: ClientType }
+  | { kind: 'clientcard'; card: ClientCard }
+
+const VISIBLE = 4
 
 export default function ProjectsSection() {
   const [current, setCurrent] = useState(0)
+  const [autoPlay, setAutoPlay] = useState(true)
   const [modal, setModal] = useState<ModalMode | null>(null)
-  const [modalImg, setModalImg] = useState(0)
-  const trackRef = useRef<HTMLDivElement>(null)
 
-  const VISIBLE = 3
-  const maxIndex = Math.max(0, projects.length - VISIBLE)
+  const maxIndex = clientCards.length - VISIBLE
 
-  function prev() { setCurrent(c => Math.max(0, c - 1)) }
-  function next() { setCurrent(c => Math.min(maxIndex, c + 1)) }
+  const next = useCallback(() => {
+    setCurrent(c => (c >= maxIndex ? 0 : c + 1))
+  }, [maxIndex])
 
-  function openProject(p: Project) {
-    setModal({ kind: 'project', project: p })
-    setModalImg(0)
+  const prev = useCallback(() => {
+    setCurrent(c => (c <= 0 ? maxIndex : c - 1))
+  }, [maxIndex])
+
+  useEffect(() => {
+    if (!autoPlay) return
+    const timer = setInterval(next, 3200)
+    return () => clearInterval(timer)
+  }, [autoPlay, next])
+
+  function openClientType(c: ClientType) {
+    setModal({ kind: 'clienttype', client: c })
     document.body.style.overflow = 'hidden'
   }
 
-  function openAll() {
-    setModal({ kind: 'all' })
-    document.body.style.overflow = 'hidden'
-  }
-
-  function openClient(c: ClientType) {
-    setModal({ kind: 'client', client: c })
+  function openClientCard(card: ClientCard) {
+    setModal({ kind: 'clientcard', card })
     document.body.style.overflow = 'hidden'
   }
 
@@ -246,7 +307,7 @@ export default function ProjectsSection() {
             <div className="section-label">С нами работают</div>
             <div className="clients-list">
               {clientTypes.map((c) => (
-                <button key={c.title} className="client-item" onClick={() => openClient(c)}>
+                <button key={c.title} className="client-item" onClick={() => openClientType(c)}>
                   <div className="client-icon">{c.icon}</div>
                   <div className="client-text">
                     <div className="client-title">{c.title}</div>
@@ -262,53 +323,67 @@ export default function ProjectsSection() {
             </div>
           </div>
 
-          {/* RIGHT: Реализованные проекты */}
-          <div className="projects-col">
+          {/* RIGHT: Наши клиенты */}
+          <div className="client-logos-col"
+            onMouseEnter={() => setAutoPlay(false)}
+            onMouseLeave={() => setAutoPlay(true)}
+          >
             <div className="projects-col-header">
-              <div className="section-label" style={{ marginBottom: 0 }}>Реализованные проекты</div>
+              <div className="section-label" style={{ marginBottom: 0 }}>Наши клиенты</div>
               <div className="projects-header-right">
-                <button className="projects-nav-btn" onClick={prev} disabled={current === 0} aria-label="Предыдущий">
+                <button className="projects-nav-btn" onClick={prev} aria-label="Предыдущий">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="15 18 9 12 15 6"/>
                   </svg>
                 </button>
-                <button className="projects-nav-btn" onClick={next} disabled={current >= maxIndex} aria-label="Следующий">
+                <button className="projects-nav-btn" onClick={next} aria-label="Следующий">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="9 18 15 12 9 6"/>
                   </svg>
                 </button>
-                <button className="projects-more-link" onClick={openAll}>
-                  Смотреть больше →
-                </button>
               </div>
             </div>
 
-            <div className="projects-carousel-wrap">
+            <div className="client-logos-carousel-wrap">
               <div
-                ref={trackRef}
-                className="projects-track"
-                style={{ transform: `translateX(calc(-${current} * (100% / ${VISIBLE} + 4px)))` }}
+                className="client-logos-track"
+                style={{ transform: `translateX(calc(-${current} * ((100cqi - 36px) / 4 + 12px)))` }}
               >
-                {projects.map((p) => (
-                  <button key={p.id} className="project-card" onClick={() => openProject(p)}>
-                    <div className="project-card-img-wrap">
-                      <img src={p.image} alt={p.title} />
-                      <span className="project-category-badge">{p.category}</span>
+                {clientCards.map((card) => (
+                  <button
+                    key={card.id}
+                    className="client-logo-card"
+                    onClick={() => openClientCard(card)}
+                    title={card.name}
+                  >
+                    <div
+                      className="client-logo-placeholder"
+                      style={{ background: card.bgColor, color: card.textColor }}
+                    >
+                      <span className="client-logo-initials">{card.initials}</span>
                     </div>
-                    <div className="project-card-body">
-                      <div className="project-card-title">{p.title}</div>
-                      <div className="project-card-desc">{p.desc}</div>
-                      <div className="project-card-location">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
-                        </svg>
-                        {p.location}
-                      </div>
-                    </div>
+                    <div className="client-logo-name">{card.name}</div>
+                    <div className="client-logo-cat">{card.category}</div>
                   </button>
                 ))}
               </div>
             </div>
+
+            {/* Dots */}
+            <div className="client-logos-dots">
+              {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+                <button
+                  key={i}
+                  className={`client-logos-dot${current === i ? ' active' : ''}`}
+                  onClick={() => setCurrent(i)}
+                  aria-label={`Страница ${i + 1}`}
+                />
+              ))}
+            </div>
+
+            <p className="client-logos-tagline">
+              Более 15 лет поставляем инженерную сантехнику для частных и коммерческих объектов Евпатории
+            </p>
           </div>
 
         </div>
@@ -318,7 +393,7 @@ export default function ProjectsSection() {
       {modal && (
         <div className="proj-modal-overlay" onClick={closeModal}>
           <div
-            className={`proj-modal${modal.kind === 'all' ? ' proj-modal--all' : ''}`}
+            className="proj-modal"
             onClick={e => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
@@ -329,7 +404,7 @@ export default function ProjectsSection() {
               </svg>
             </button>
 
-            {modal.kind === 'client' ? (
+            {modal.kind === 'clienttype' ? (
               <>
                 <div className="usp-modal-imgs">
                   <img
@@ -353,65 +428,27 @@ export default function ProjectsSection() {
                   </ul>
                 </div>
               </>
-            ) : modal.kind === 'all' ? (
-              <div className="proj-modal-all">
-                <div className="proj-modal-all-header">
-                  <div className="usp-modal-label">Все объекты</div>
-                  <h2 className="usp-modal-title">Реализованные проекты</h2>
-                </div>
-                <div className="proj-all-grid">
-                  {projects.map((p) => (
-                    <button key={p.id} className="project-card proj-all-card" onClick={() => { setModal({ kind: 'project', project: p }); setModalImg(0) }}>
-                      <div className="project-card-img-wrap">
-                        <img src={p.image} alt={p.title} />
-                        <span className="project-category-badge">{p.category}</span>
-                      </div>
-                      <div className="project-card-body">
-                        <div className="project-card-title">{p.title}</div>
-                        <div className="project-card-desc">{p.desc}</div>
-                        <div className="project-card-location">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
-                          </svg>
-                          {p.location}
-                        </div>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            ) : modal.kind === 'project' ? (
+            ) : modal.kind === 'clientcard' ? (
               <>
-                <div className="usp-modal-imgs">
-                  <img
-                    src={modal.project.images[modalImg]}
-                    alt={modal.project.title}
-                    className="usp-modal-main-img"
-                  />
-                  {modal.project.images.length > 1 && (
-                    <div className="usp-modal-thumbs">
-                      {modal.project.images.map((img, i) => (
-                        <button
-                          key={i}
-                          className={`usp-modal-thumb${i === modalImg ? ' active' : ''}`}
-                          onClick={() => setModalImg(i)}
-                        >
-                          <img src={img} alt="" />
-                        </button>
-                      ))}
-                    </div>
-                  )}
+                <div className="usp-modal-imgs client-card-modal-left" style={{ background: modal.card.bgColor }}>
+                  <div className="client-card-modal-logo" style={{ color: modal.card.textColor }}>
+                    <span className="client-card-modal-initials">{modal.card.initials}</span>
+                    <span className="client-card-modal-name">{modal.card.name}</span>
+                  </div>
+                  <div className="client-card-modal-tag" style={{ color: modal.card.textColor, borderColor: modal.card.textColor + '40' }}>
+                    {modal.card.category}
+                  </div>
                 </div>
                 <div className="usp-modal-body">
-                  <div className="usp-modal-label">{modal.project.category} · {modal.project.location}</div>
-                  <h2 className="usp-modal-title">{modal.project.title}</h2>
+                  <div className="usp-modal-label">{modal.card.modal.subtitle}</div>
+                  <h2 className="usp-modal-title">{modal.card.name}</h2>
                   <ul className="usp-modal-points">
-                    {modal.project.works.map((w, i) => (
+                    {modal.card.modal.points.map((point, i) => (
                       <li key={i}>
                         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                           <circle cx="8" cy="8" r="7"/><polyline points="5 8 7 10 11 6"/>
                         </svg>
-                        {w}
+                        {point}
                       </li>
                     ))}
                   </ul>
