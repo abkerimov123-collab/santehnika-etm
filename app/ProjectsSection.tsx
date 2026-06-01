@@ -24,7 +24,7 @@ const clientCards: ClientCard[] = [
     initials: 'ТС',
     bgColor: '#FFF3E0',
     textColor: '#E65100',
-    logo: '/client-teploservice.png',
+    logo: '/client-teploservice.webp',
     modal: {
       subtitle: 'Партнёрство с СЦ Теплосервис',
       points: [
@@ -43,7 +43,7 @@ const clientCards: ClientCard[] = [
     initials: 'СГ',
     bgColor: '#FAFAFA',
     textColor: '#1A1A1A',
-    logo: '/client-sian.png',
+    logo: '/client-sian.webp',
     modal: {
       subtitle: 'Партнёрство с СИАН',
       points: [
@@ -62,7 +62,7 @@ const clientCards: ClientCard[] = [
     initials: 'ОС',
     bgColor: '#F5F5F5',
     textColor: '#333333',
-    logo: '/client-ozero.png',
+    logo: '/client-ozero.webp',
     modal: {
       subtitle: 'Партнёрство с «Озеро Сновидений»',
       points: [
@@ -81,7 +81,7 @@ const clientCards: ClientCard[] = [
     initials: 'ТЭС',
     bgColor: '#F5F5F5',
     textColor: '#333333',
-    logo: '/client-tes.png',
+    logo: '/client-tes.webp',
     modal: {
       subtitle: 'Партнёрство с ТЭС Отель',
       points: [
@@ -100,7 +100,7 @@ const clientCards: ClientCard[] = [
     initials: 'УКП',
     bgColor: '#F5F1E8',
     textColor: '#1A3A8F',
-    logo: '/Client-prestizh.png',
+    logo: '/Client-prestizh.webp',
     modal: {
       subtitle: 'Партнёрство с УК «Престиж»',
       points: [
@@ -119,7 +119,7 @@ const clientCards: ClientCard[] = [
     initials: 'УКУ',
     bgColor: '#F5F5F5',
     textColor: '#333333',
-    logo: '/client-uyut.png',
+    logo: '/client-uyut.webp',
     modal: {
       subtitle: 'Партнёрство с УК «Уют»',
       points: [
@@ -138,7 +138,7 @@ const clientCards: ClientCard[] = [
     initials: 'ТВ',
     bgColor: '#F5F5F5',
     textColor: '#333333',
-    logo: '/client-tavr.png',
+    logo: '/client-tavr.webp',
     modal: {
       subtitle: 'Партнёрство с санаторием «Таврия»',
       points: [
@@ -157,7 +157,7 @@ const clientCards: ClientCard[] = [
     initials: 'КС',
     bgColor: '#F5F5F5',
     textColor: '#333333',
-    logo: '/client-consol.png',
+    logo: '/client-consol.webp',
     modal: {
       subtitle: 'Партнёрство с «Консоль-Строй»',
       points: [

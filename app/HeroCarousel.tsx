@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 const slides = [
-  { src: '/hero-1.png', pos: 'center' },
-  { src: '/hero-2.png', pos: 'center 30%' },
+  { src: '/hero-1.webp', pos: 'center' },
+  { src: '/hero-2.webp', pos: 'center 30%' },
 ]
 
 export default function HeroCarousel() {
