@@ -28,17 +28,17 @@ app/
   YandexMap.tsx         — встроенная Яндекс.Карта (динамический import, no SSR)
   api/callback/route.ts — POST-эндпоинт: принимает телефон и отправляет в Telegram-бота
 public/
-  hero-1.png, hero-2.png        — слайды карусели
-  edisson-50.png                — товар Edisson 50L
-  shuft-09.png                  — товар SHUFT 09
-  client-teploservice.png       — логотип СЦ Теплосервис
-  client-sian.png               — логотип СИАН
-  client-ozero.png              — логотип «Озеро Сновидений»
-  client-tes.png                — логотип ТЭС Отель
-  Client-prestizh.png           — логотип УК «Престиж»
-  client-uyut.png               — логотип УК «Уют»
-  client-tavr.png               — логотип Санаторий «Таврия»
-  client-consol.png             — логотип «Консоль-Строй»
+  hero-1.webp, hero-2.webp      — слайды карусели (WebP, ~100KB каждый)
+  edisson-50.webp               — товар Edisson 50L
+  shuft-09.webp                 — товар SHUFT 09
+  client-teploservice.webp      — логотип СЦ Теплосервис
+  client-sian.webp              — логотип СИАН
+  client-ozero.webp             — логотип «Озеро Сновидений»
+  client-tes.webp               — логотип ТЭС Отель
+  Client-prestizh.webp          — логотип УК «Престиж»
+  client-uyut.webp              — логотип УК «Уют»
+  client-tavr.webp              — логотип Санаторий «Таврия»
+  client-consol.webp            — логотип «Консоль-Строй»
 ```
 
 ## Переменные окружения
@@ -77,8 +77,8 @@ const MAX_URL = 'https://max.ru/u/f9LHodD0cOJo41JUPgh8J_By2rnO8KkNawBUNBlsW5IYkA
 
 - **Основной (canonical):** `сантехника-етм.рф` (punycode: `xn----7sbatcpotcb4boh9a.xn--p1ai`)
 - Подключён через Vercel → Settings → Domains, A-запись `216.198.79.1` на рег.ру
-- Планируется добавить латинский домен как алиас (не canonical)
-- Аналитика подключается после того как домен полностью заработает
+- Аккаунт рег.ру подтверждён через Госуслуги (домен `.рф` требует верификацию)
+- Яндекс.Метрика подключена (id: 109497218) — счётчик с вебвизором
 
 ## Что уже реализовано
 
@@ -127,6 +127,24 @@ const MAX_URL = 'https://max.ru/u/f9LHodD0cOJo41JUPgh8J_By2rnO8KkNawBUNBlsW5IYkA
 - Внизу: часы работы (Пн–Пт 8:00–17:00, Сб 8:00–15:00) и адрес-ссылка на Яндекс.Карты
 
 Форма отправляет номер в Telegram-бот. Уведомление приходит в групповой чат (`-5224153929`).
+
+## Оптимизация изображений
+
+Все публичные изображения конвертированы из PNG в WebP (было ~17 MB → стало ~640 KB, −95%).
+Компоненты используют `next/image` (`<Image>`) с `fill`, `priority`, `sizes`.
+
+При добавлении новых изображений — конвертировать через sharp:
+```bash
+node -e "require('sharp')('public/file.png').webp({quality:82}).toFile('public/file.webp')"
+```
+
+## Рабочий процесс (работа с двух ПК)
+
+**После каждой сессии** говори Клоду: **«сохрани и задеплой»**
+— сделает git add, commit, push и vercel --prod.
+
+**Начиная работу на другом ПК** говори Клоду: **«подтяни последние изменения»**
+— сделает git pull.
 
 ## Деплой
 
