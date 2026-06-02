@@ -54,12 +54,19 @@ export default function CallButton() {
     if (!phone.trim()) return
     setStatus('sending')
     try {
-      const res = await fetch('/api/callback', {
+      const params = new URLSearchParams()
+      params.append('FIELDS[TITLE]', 'Заявка с сайта сантехника-етм.рф')
+      params.append('FIELDS[PHONE][0][VALUE]', phone.trim())
+      params.append('FIELDS[PHONE][0][VALUE_TYPE]', 'WORK')
+      params.append('FIELDS[SOURCE_ID]', 'WEB')
+      params.append('FIELDS[ASSIGNED_BY_ID]', '1')
+      const res = await fetch('https://etmevp.bitrix24.ru/rest/1/yqxbteshp2g3y8kh/crm.lead.add', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone }),
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString(),
       })
-      if (res.ok) {
+      const data = await res.json()
+      if (data.result) {
         setStatus('sent')
         setPhone('')
         setTimeout(() => { setOpen(false); setStatus('idle') }, 2500)
