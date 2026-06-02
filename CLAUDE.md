@@ -4,10 +4,10 @@
 
 ## Стек
 
-- **Next.js 14.2** (App Router, SSR/SSG)
+- **Next.js 14.2** (App Router, статический экспорт `output: 'export'`)
 - **React 18** + **TypeScript**
 - Стили — кастомный CSS в `app/globals.css` (никаких UI-библиотек)
-- Деплой — **Vercel**
+- Деплой — **рег.ру хостинг Host-Lite** (FTP-загрузка папки `out/`)
 
 ## Структура
 
@@ -24,9 +24,9 @@ app/
   CallButton.tsx        — FAB-кнопка звонка: мобайл — прямой звонок, десктоп — встроенная модалка (своя, не CallbackModal)
   StickyCallWidget.tsx  — альтернативная sticky-кнопка «Заказать звонок» → CallbackModal (не используется на странице, заготовка)
   HeaderPhoneButton.tsx — кнопка телефона в хедере → CallbackModal
-  CallbackModal.tsx     — общая модалка связи (props: open, phone, phoneDisplay, onClose): каналы + форма → Telegram
+  CallbackModal.tsx     — общая модалка связи (props: open, phone, phoneDisplay, onClose): каналы + форма → Битрикс24
   YandexMap.tsx         — встроенная Яндекс.Карта (динамический import, no SSR)
-  api/callback/route.ts — POST-эндпоинт: принимает телефон и отправляет в Telegram-бота
+  api/callback/route.ts — старый Telegram-эндпоинт (не используется, игнорируется при сборке)
 public/
   hero-1.webp, hero-2.webp      — слайды карусели (WebP, ~100KB каждый)
   edisson-50.webp               — товар Edisson 50L
@@ -41,21 +41,17 @@ public/
   client-consol.webp            — логотип «Консоль-Строй»
 ```
 
-## Переменные окружения
+## Форма обратного звонка → Битрикс24
 
-Файл `.env.local` (не коммитится):
+Форма в `CallbackModal.tsx` и `CallButton.tsx` отправляет лид напрямую из браузера через Битрикс24 REST API (входящий вебхук):
 
 ```
-TELEGRAM_BOT_TOKEN=...   # токен бота для заявок с формы обратного звонка
-TELEGRAM_CHAT_ID=...     # chat_id группового чата (-5224153929)
+POST https://etmevp.bitrix24.ru/rest/1/yqxbteshp2g3y8kh/crm.lead.add
 ```
 
-На Vercel переменные обновляются через CLI:
+Поля: `FIELDS[TITLE]`, `FIELDS[PHONE][0][VALUE]`, `FIELDS[SOURCE_ID]=WEB`, `FIELDS[ASSIGNED_BY_ID]=1`
 
-```bash
-npx vercel env rm TELEGRAM_CHAT_ID production
-echo "значение" | npx vercel env add TELEGRAM_CHAT_ID production
-```
+Бэкенд не нужен — вызов идёт прямо из JS в браузере. Переменные окружения для Telegram больше не используются.
 
 ## Контакты в коде (константы в `app/page.tsx`)
 
@@ -76,9 +72,20 @@ const MAX_URL = 'https://max.ru/u/f9LHodD0cOJo41JUPgh8J_By2rnO8KkNawBUNBlsW5IYkA
 ## Домены
 
 - **Основной (canonical):** `сантехника-етм.рф` (punycode: `xn----7sbatcpotcb4boh9a.xn--p1ai`)
-- Подключён через Vercel → Settings → Domains, A-запись `216.198.79.1` на рег.ру
+- A-запись `37.140.192.54` на рег.ру (NS: `ns1.reg.ru`, `ns2.reg.ru`)
+- Ранее был Vercel (`216.198.79.1`) — переехали из-за блокировок в РФ
 - Аккаунт рег.ру подтверждён через Госуслуги (домен `.рф` требует верификацию)
 - Яндекс.Метрика подключена (id: 109497218) — счётчик с вебвизором
+
+## Хостинг рег.ру
+
+- **Тариф:** Host-Lite (`server79.hosting.reg.ru`)
+- **IP сервера:** `37.140.192.54`
+- **Панель управления:** https://server79.hosting.reg.ru:1500/ (Ispmanager)
+- **Логин панели:** `u3534507`
+- **FTP логин:** `u3534507`
+- **Корневая директория сайта:** `/www/xn----7sbatcpotcb4boh9a.xn--p1ai/`
+- **SSL:** Let's Encrypt (настроить в Ispmanager → Сайты → SSL-сертификаты)
 
 ## Что уже реализовано
 
@@ -94,7 +101,7 @@ const MAX_URL = 'https://max.ru/u/f9LHodD0cOJo41JUPgh8J_By2rnO8KkNawBUNBlsW5IYkA
 - Встроенная Яндекс.Карта
 - Sticky FAB-кнопка звонка (зелёная, правый нижний угол, пульсирующая анимация)
 - Кнопка телефона в хедере (зелёная рамка с glow) — открывает `CallbackModal`
-- API-роут `/api/callback` → Telegram-бот (уведомления уходят в групповой чат `-5224153929`)
+- Форма обратного звонка → лид в Битрикс24 CRM (`etmevp.bitrix24.ru`)
 - Адрес в модалках кликабелен — ведёт на Яндекс.Карты (`https://yandex.com/maps/-/CPHKZN13`), выделен голубым с подчёркиванием и стрелкой ↗
 - Часы работы в футере сдвинуты влево и выделены ярче
 
@@ -123,15 +130,13 @@ const MAX_URL = 'https://max.ru/u/f9LHodD0cOJo41JUPgh8J_By2rnO8KkNawBUNBlsW5IYkA
 
 Содержит:
 - Левая колонка: каналы связи (Позвонить / WhatsApp / Telegram)
-- Правая колонка: форма «Заказать звонок» (поле телефона → POST `/api/callback`)
+- Правая колонка: форма «Заказать звонок» (поле телефона → Битрикс24 `crm.lead.add`)
 - Внизу: часы работы (Пн–Пт 8:00–17:00, Сб 8:00–15:00) и адрес-ссылка на Яндекс.Карты
-
-Форма отправляет номер в Telegram-бот. Уведомление приходит в групповой чат (`-5224153929`).
 
 ## Оптимизация изображений
 
 Все публичные изображения конвертированы из PNG в WebP (было ~17 MB → стало ~640 KB, −95%).
-Компоненты используют `next/image` (`<Image>`) с `fill`, `priority`, `sizes`.
+Сборка использует `images: { unoptimized: true }` (статический экспорт не поддерживает Next.js Image Optimization).
 
 При добавлении новых изображений — конвертировать через sharp:
 ```bash
@@ -141,25 +146,26 @@ node -e "require('sharp')('public/file.png').webp({quality:82}).toFile('public/f
 ## Рабочий процесс (работа с двух ПК)
 
 **После каждой сессии** говори Клоду: **«сохрани и задеплой»**
-— сделает git add, commit, push и vercel --prod.
+— сделает git add, commit, push и загрузит `out/` на рег.ру по FTP.
 
 **Начиная работу на другом ПК** говори Клоду: **«подтяни последние изменения»**
 — сделает git pull.
 
-## Деплой
-
-GitHub-интеграция Vercel **не всегда подхватывает пуш** с локальной машины (когда `git config user.email` не совпадает с аккаунтом Vercel). В этом случае деплоить вручную:
+## Деплой на рег.ру (FTP)
 
 ```bash
-npx vercel --prod --yes
+npm run build   # собирает папку out/
+# затем загрузить out/ по FTP:
+# хост: 37.140.192.54
+# логин: u3534507
+# пароль: см. панель рег.ру → Хостинги → доступы
+# путь: /www/xn----7sbatcpotcb4boh9a.xn--p1ai/
 ```
-
-Проект слинкован: `abkerimov123-3754s-projects/santehnika-etm` (`.vercel/project.json` присутствует после первого `vercel link`).
 
 ## Команды
 
 ```bash
 npm run dev    # локальный сервер на :3000 (если занят — автоматически :3001 и т.д.)
-npm run build  # production-сборка
+npm run build  # production-сборка → папка out/
 npm run lint   # ESLint
 ```
