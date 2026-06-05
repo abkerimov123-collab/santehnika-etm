@@ -1025,10 +1025,10 @@ h1 em { font-style: normal; color: rgba(255,255,255,0.28); }
 
 /* PRODUCTS */
 .products-section {
-  padding: 48px 48px 64px;
+  padding: 48px 32px 64px;
   background: #132233;
 }
-.products-inner { max-width: 1100px; margin: 0 auto; }
+.products-inner { max-width: 1400px; margin: 0 auto; }
 .products-header {
   display: flex;
   align-items: center;
@@ -1041,13 +1041,36 @@ h1 em { font-style: normal; color: rgba(255,255,255,0.28); }
   color: rgba(255,255,255,0.75);
   margin-bottom: 0;
 }
+.products-header-right { display: flex; align-items: center; gap: 16px; }
+.products-nav { display: flex; gap: 4px; }
+.products-nav-btn {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 6px;
+  color: rgba(255,255,255,0.7);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  padding: 0;
+}
+.products-nav-btn:hover { background: rgba(255,255,255,0.14); color: var(--white); }
 .products-cta { font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none; background: none; border: none; padding: 0; cursor: pointer; transition: color 0.2s; }
 .products-cta:hover { color: var(--white); }
 .products-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
   gap: 12px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.18) transparent;
+  padding-bottom: 8px;
 }
+.products-grid::-webkit-scrollbar { height: 3px; }
+.products-grid::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 2px; }
+.products-grid::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.22); border-radius: 2px; }
 .product-card {
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.08);
@@ -1058,6 +1081,7 @@ h1 em { font-style: normal; color: rgba(255,255,255,0.28); }
   flex-direction: column;
   transition: border-color 0.2s, transform 0.2s;
   cursor: pointer;
+  flex: 0 0 255px;
 }
 .product-card:hover { border-color: rgba(255,255,255,0.18); transform: translateY(-2px); }
 .product-badge {
@@ -1100,8 +1124,8 @@ h1 em { font-style: normal; color: rgba(255,255,255,0.28); }
 .product-desc { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.42); line-height: 1.6; margin-bottom: 18px; }
 .product-price-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; }
 .product-price-group { display: flex; flex-direction: column; gap: 2px; }
-.product-price { font-family: var(--font-unbounded), 'Unbounded', sans-serif; font-size: 13px; font-weight: 700; color: var(--white); }
-.product-old-price { font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.3); text-decoration: line-through; }
+.product-price { font-family: var(--font-unbounded), 'Unbounded', sans-serif; font-size: 13px; font-weight: 700; color: var(--white); white-space: nowrap; }
+.product-old-price { font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.3); text-decoration: line-through; white-space: nowrap; }
 .product-btn {
   font-size: 11px;
   font-weight: 600;
@@ -1558,8 +1582,7 @@ h1          { animation: fadeUp 0.55s 0.1s ease both; }
   .statement-vline { display: none; }
   .statement-meta { max-width: 100%; }
   footer { padding: 24px; }
-  .products-section { padding-left: 24px; padding-right: 24px; }
-  .products-grid { grid-template-columns: 1fr 1fr; }
+  .products-section { padding-left: 16px; padding-right: 16px; }
   .brands-section { padding-bottom: 48px; }
   .modal-dialog { grid-template-columns: 1fr; overflow-y: auto; max-height: 92vh; }
   .modal-img { min-height: 220px; max-height: 260px; }
@@ -1573,7 +1596,6 @@ h1          { animation: fadeUp 0.55s 0.1s ease both; }
   .usp-modal-title { font-size: 18px; }
 }
 @media (max-width: 480px) {
-  .products-grid { grid-template-columns: 1fr; }
   .usp2-grid { grid-template-columns: 1fr; }
   .usp2-stats { grid-template-columns: 1fr 1fr; }
 }

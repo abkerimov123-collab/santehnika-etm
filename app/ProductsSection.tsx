@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import ProductModal, { Product } from './ProductModal'
 import CallbackModal from './CallbackModal'
@@ -42,24 +42,111 @@ const products: Product[] = [
   },
   {
     badge: 'В наличии',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=85&auto=format&fit=crop',
-    name: 'Водонагреватель',
-    desc: 'Накопительные и проточные. 30–200 литров. Установка под ключ.',
-    price: 'от 8 000 ₽',
+    img: '/BAXI-ECO-4S.webp',
+    name: 'Котёл Baxi Eco 4s 24 F',
+    desc: 'Настенный газовый двухконтурный котёл. Мощность 24 кВт. Отопление и горячее водоснабжение.',
+    fullDesc: 'Настенный газовый двухконтурный котёл итальянского производства. Закрытая камера сгорания, встроенный расширительный бак и циркуляционный насос. Электронный розжиг, защита от замерзания. Подходит для квартир и домов до 240 м².',
+    price: '62 000 ₽',
+    specs: [
+      { label: 'Мощность', value: '24 кВт' },
+      { label: 'КПД', value: '91,4 %' },
+      { label: 'Площадь обогрева', value: 'до 240 м²' },
+      { label: 'Контуров', value: '2 (отопление + ГВС)' },
+      { label: 'Камера сгорания', value: 'закрытая' },
+      { label: 'Розжиг', value: 'электронный' },
+      { label: 'Гарантия', value: '2 года' },
+    ],
   },
   {
     badge: 'Скидка',
     sale: true,
-    img: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=500&q=85&auto=format&fit=crop',
-    name: 'Коллектор тёплого пола',
-    desc: 'Нержавеющая сталь. Комплект под любое количество контуров.',
-    price: 'от 6 500 ₽',
+    img: '/Thermofix-sn-103.webp',
+    name: 'Смеситель Thermofix SN-103',
+    desc: 'Термостатический смеситель для душа. Точная регулировка температуры. Хромированное покрытие.',
+    fullDesc: 'Термостатический смеситель для душевой кабины и ванны. Автоматически поддерживает заданную температуру воды, защищает от ожогов. Керамический картридж, хромированная латунь. Подходит для скрытого и открытого монтажа.',
+    price: '4 100 ₽',
+    oldPrice: '5 400 ₽',
+    specs: [
+      { label: 'Тип', value: 'термостатический' },
+      { label: 'Корпус', value: 'латунь, хром' },
+      { label: 'Картридж', value: 'керамический' },
+      { label: 'Подключение', value: '1/2"' },
+      { label: 'Макс. давление', value: '0,6 МПа' },
+      { label: 'Монтаж', value: 'открытый / скрытый' },
+    ],
+  },
+  {
+    badge: 'В наличии',
+    img: '/GROHE.webp',
+    name: 'Инсталляция GROHE с унитазом',
+    desc: 'Комплект: инсталляция + унитаз с сиденьем. Скрытый монтаж. Бесшумный механизм смыва.',
+    fullDesc: 'Готовый комплект для подвесного унитаза: инсталляция GROHE Rapid SL, унитаз, сиденье с микролифтом и клавиша смыва. Стальная рама выдерживает нагрузку до 400 кг. Бесшумное наполнение бачка, двойной смыв 3/6 л.',
+    price: '28 000 ₽',
+    specs: [
+      { label: 'Бренд', value: 'GROHE' },
+      { label: 'Тип монтажа', value: 'подвесной (скрытый)' },
+      { label: 'Нагрузка на раму', value: 'до 400 кг' },
+      { label: 'Смыв', value: '3 / 6 л (двойной)' },
+      { label: 'Сиденье', value: 'с микролифтом' },
+      { label: 'Шум наполнения', value: 'класс 1 (тихий)' },
+      { label: 'Гарантия', value: '5 лет' },
+    ],
+  },
+  {
+    badge: 'В наличии',
+    img: '/royal-thermo.webp',
+    name: 'Радиатор Royal Thermo 500',
+    desc: 'Алюминиевый радиатор, высота 500 мм. Высокая теплоотдача. Цена — за 1 секцию.',
+    fullDesc: 'Алюминиевый секционный радиатор Royal Thermo 500. Увеличенное межосевое расстояние 500 мм. Высокая теплоотдача — 183 Вт на секцию. Рабочее давление 20 атм, испытательное — 30 атм. Подходит для автономных и централизованных систем отопления.',
+    price: '1 150 ₽',
+    specs: [
+      { label: 'Материал', value: 'алюминий' },
+      { label: 'Межосевое расстояние', value: '500 мм' },
+      { label: 'Теплоотдача секции', value: '183 Вт' },
+      { label: 'Рабочее давление', value: '20 атм' },
+      { label: 'Испыт. давление', value: '30 атм' },
+      { label: 'Объём секции', value: '0,46 л' },
+      { label: 'Цена', value: 'за 1 секцию' },
+    ],
   },
 ]
 
 export default function ProductsSection() {
   const [selected, setSelected] = useState<Product | null>(null)
   const [callbackOpen, setCallbackOpen] = useState(false)
+  const gridRef = useRef<HTMLDivElement>(null)
+  const pausedRef = useRef(false)
+
+  const scroll = (dir: 'left' | 'right') => {
+    if (gridRef.current) gridRef.current.scrollBy({ left: dir === 'right' ? 267 : -267, behavior: 'smooth' })
+  }
+
+  useEffect(() => {
+    const el = gridRef.current
+    if (!el) return
+
+    const pause = () => { pausedRef.current = true }
+    const resume = () => { pausedRef.current = false }
+
+    el.addEventListener('mouseenter', pause)
+    el.addEventListener('mouseleave', resume)
+    el.addEventListener('touchstart', pause, { passive: true })
+    el.addEventListener('touchend', resume)
+
+    const id = window.innerWidth > 700 ? setInterval(() => {
+      if (pausedRef.current) return
+      el.scrollLeft += 1
+      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 1) el.scrollLeft = 0
+    }, 40) : null
+
+    return () => {
+      if (id) clearInterval(id)
+      el.removeEventListener('mouseenter', pause)
+      el.removeEventListener('mouseleave', resume)
+      el.removeEventListener('touchstart', pause)
+      el.removeEventListener('touchend', resume)
+    }
+  }, [])
 
   return (
     <>
@@ -67,9 +154,15 @@ export default function ProductsSection() {
         <div className="products-inner">
           <div className="products-header">
             <div className="section-label">Горячие позиции</div>
-            <button className="products-cta" onClick={() => setCallbackOpen(true)}>Узнать наличие →</button>
+            <div className="products-header-right">
+              <div className="products-nav">
+                <button className="products-nav-btn" onClick={() => scroll('left')} aria-label="Назад">‹</button>
+                <button className="products-nav-btn" onClick={() => scroll('right')} aria-label="Вперёд">›</button>
+              </div>
+              <button className="products-cta" onClick={() => setCallbackOpen(true)}>Узнать наличие →</button>
+            </div>
           </div>
-          <div className="products-grid">
+          <div className="products-grid" ref={gridRef}>
             {products.map((p) => (
               <div
                 className="product-card"
