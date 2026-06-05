@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 
 const WA_URL = `https://wa.me/79785623232`
 const TG_URL = 'https://t.me/evpaterm'
+const MAX_URL = 'https://max.ru/u/f9LHodD0cOJo41JUPgh8J_By2rnO8KkNawBUNBlsW5IYkABer3uiQLOy0vc'
 
 function LogoIcon({ size = 18 }: { size?: number }) {
   return (
@@ -132,6 +133,19 @@ export default function CallbackModal({ open, phone, phoneDisplay, onClose }: Pr
                 </span>
                 <span className="cm-channel-info">
                   <span className="cm-channel-name">Telegram</span>
+                  <span className="cm-channel-hint">Написать в чат</span>
+                </span>
+                <svg className="cm-channel-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="9 18 15 12 9 6" /></svg>
+              </a>
+
+              <a href={MAX_URL} target="_blank" rel="noopener noreferrer" className="cm-channel">
+                <span className="cm-channel-icon cm-channel-icon--max">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path fillRule="evenodd" d="M5 2h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H9.5l-4 4 1-4H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3zM12 14.5a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9zm0-2.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
+                  </svg>
+                </span>
+                <span className="cm-channel-info">
+                  <span className="cm-channel-name">MAX</span>
                   <span className="cm-channel-hint">Написать в чат</span>
                 </span>
                 <svg className="cm-channel-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><polyline points="9 18 15 12 9 6" /></svg>

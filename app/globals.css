@@ -1415,6 +1415,7 @@ h1          { animation: fadeUp 0.55s 0.1s ease both; }
 .cm-channel-icon--call { background: #22c55e; }
 .cm-channel-icon--wa  { background: #25d366; }
 .cm-channel-icon--tg  { background: #229ed9; }
+.cm-channel-icon--max { background: #6c47ff; }
 .cm-channel-info { display: flex; flex-direction: column; flex: 1; }
 .cm-channel-name { font-size: 14px; font-weight: 500; color: #fff; line-height: 1.3; }
 .cm-channel-hint { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.4); line-height: 1.4; }
