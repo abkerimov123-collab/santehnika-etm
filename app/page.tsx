@@ -7,6 +7,7 @@ import HeaderPhoneButton from './HeaderPhoneButton'
 
 const YandexMap = dynamic(() => import('./YandexMap'), { ssr: false })
 const UspSection = dynamic(() => import('./UspSection'), { ssr: false })
+import CookieBanner from './CookieBanner'
 
 function LogoIcon({ size = 24 }: { size?: number }) {
   return (
@@ -180,6 +181,9 @@ export default function Home() {
 
       {/* CALL FAB */}
       <CallButton />
+
+      {/* COOKIE BANNER */}
+      <CookieBanner />
 
       {/* FOOTER */}
       <footer>
