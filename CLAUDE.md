@@ -27,6 +27,7 @@ app/
   CallbackModal.tsx     — общая модалка связи (props: open, phone, phoneDisplay, onClose): каналы + форма → Битрикс24
   YandexMap.tsx         — встроенная Яндекс.Карта (динамический import, no SSR)
   privacy/page.tsx      — страница «Политика конфиденциальности» (маршрут /privacy)
+  CookieBanner.tsx      — cookie-уведомление внизу экрана (localStorage: cookie_consent_v1)
   api/callback/route.ts — старый Telegram-эндпоинт (не используется, игнорируется при сборке)
 public/
   hero-1.webp, hero-2.webp      — слайды карусели (WebP, ~100KB каждый)
@@ -108,6 +109,7 @@ const MAX_URL = 'https://max.ru/u/f9LHodD0cOJo41JUPgh8J_By2rnO8KkNawBUNBlsW5IYkA
 - Часы работы в футере сдвинуты влево и выделены ярче
 - Страница «Политика конфиденциальности» (`/privacy`) — ИП Абкеримов А.Ш., ИНН 911005332108
 - Ссылка на `/privacy` в футере (`.footer-privacy`, прижата вправо через `margin-left: auto`)
+- Cookie-баннер (`CookieBanner.tsx`): фиксированный внизу экрана, текст + кнопка «Понятно» + ссылка «Подробнее» → `/privacy`; согласие сохраняется в `localStorage` под ключом `cookie_consent_v1`; `z-index: 190` (ниже FAB 200 и модалок 300); `padding-right: 110px` чтобы не перекрываться с FAB-кнопкой
 - Чекбокс согласия на обработку ПД в обеих формах (`CallbackModal` и `CallButton`):
   - по умолчанию не отмечен
   - кнопка «Жду звонка» визуально серая (`.cm-submit--locked`) до постановки галочки
