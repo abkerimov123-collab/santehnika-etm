@@ -1517,6 +1517,43 @@ h1          { animation: fadeUp 0.55s 0.1s ease both; }
   padding: 13px 0;
 }
 .cm-input::placeholder { color: rgba(255,255,255,0.3); }
+/* consent checkbox */
+.cm-consent { display: flex; align-items: flex-start; gap: 9px; cursor: pointer; user-select: none; }
+.cm-consent-checkbox { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
+.cm-consent-box {
+  flex-shrink: 0;
+  width: 17px;
+  height: 17px;
+  margin-top: 1px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  background: rgba(255,255,255,0.05);
+  transition: background 0.18s, border-color 0.18s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cm-consent-checkbox:checked + .cm-consent-box {
+  background: #3b82f6;
+  border-color: #3b82f6;
+}
+.cm-consent-checkbox:checked + .cm-consent-box::after {
+  content: '';
+  display: block;
+  width: 9px;
+  height: 5px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg) translate(1px, -1px);
+}
+.cm-consent:hover .cm-consent-box { border-color: rgba(255,255,255,0.4); }
+.cm-consent--highlight .cm-consent-box { border-color: #f59e0b !important; box-shadow: 0 0 0 3px rgba(245,158,11,0.18); }
+.cm-consent--highlight .cm-consent-text { color: rgba(255,255,255,0.7); }
+.cm-consent-text { font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.5); line-height: 1.55; transition: color 0.3s; }
+.cm-consent-link { color: rgba(100,160,255,0.85); text-decoration: underline; text-underline-offset: 2px; }
+.cm-consent-link:hover { color: rgba(100,160,255,1); }
+.cm-consent-hint { font-size: 11px; color: #f59e0b; margin: -2px 0 0 26px; line-height: 1.4; }
+
 .cm-submit {
   background: #3b82f6;
   color: #fff;
@@ -1533,6 +1570,8 @@ h1          { animation: fadeUp 0.55s 0.1s ease both; }
 .cm-submit:hover { background: #2563eb; }
 .cm-submit:active { transform: scale(0.98); }
 .cm-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+.cm-submit--locked { opacity: 0.5; cursor: not-allowed; }
+.cm-submit--locked:hover { background: #3b82f6; }
 .cm-privacy {
   display: flex;
   align-items: center;

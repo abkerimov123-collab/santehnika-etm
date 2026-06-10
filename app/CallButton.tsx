@@ -23,6 +23,9 @@ export default function CallButton() {
   const [isMobile, setIsMobile] = useState(false)
   const [open, setOpen] = useState(false)
   const [phone, setPhone] = useState('')
+  const [consent, setConsent] = useState(false)
+  const [showHint, setShowHint] = useState(false)
+  const [highlight, setHighlight] = useState(false)
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -44,6 +47,10 @@ export default function CallButton() {
   }, [open])
 
   useEffect(() => {
+    if (!open) { setPhone(''); setConsent(false); setShowHint(false); setHighlight(false); setStatus('idle') }
+  }, [open])
+
+  useEffect(() => {
     if (!open) return
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false) }
     window.addEventListener('keydown', onKey)
@@ -52,6 +59,12 @@ export default function CallButton() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    if (!consent) {
+      setShowHint(true)
+      setHighlight(true)
+      setTimeout(() => setHighlight(false), 1500)
+      return
+    }
     if (!phone.trim()) return
     setStatus('sending')
     try {
@@ -224,7 +237,26 @@ export default function CallButton() {
                         disabled={status === 'sending'}
                       />
                     </div>
-                    <button type="submit" className="cm-submit" disabled={status === 'sending'}>
+                    <label className={`cm-consent${highlight ? ' cm-consent--highlight' : ''}`}>
+                      <input
+                        type="checkbox"
+                        className="cm-consent-checkbox"
+                        checked={consent}
+                        onChange={e => { setConsent(e.target.checked); if (e.target.checked) setShowHint(false) }}
+                        disabled={status === 'sending'}
+                      />
+                      <span className="cm-consent-box" aria-hidden="true" />
+                      <span className="cm-consent-text">
+                        Я согласен на обработку персональных данных по{' '}
+                        <a href="/privacy" target="_blank" rel="noopener noreferrer" className="cm-consent-link">
+                          Политике конфиденциальности
+                        </a>
+                      </span>
+                    </label>
+                    {showHint && !consent && (
+                      <p className="cm-consent-hint">Поставьте галочку, чтобы отправить заявку</p>
+                    )}
+                    <button type="submit" className={`cm-submit${!consent ? ' cm-submit--locked' : ''}`} disabled={status === 'sending'}>
                       {status === 'sending' ? 'Отправляем…' : 'Жду звонка'}
                     </button>
                     {status === 'error' && (
