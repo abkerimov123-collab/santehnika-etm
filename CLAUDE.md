@@ -26,6 +26,7 @@ app/
   HeaderPhoneButton.tsx — кнопка телефона в хедере → CallbackModal
   CallbackModal.tsx     — общая модалка связи (props: open, phone, phoneDisplay, onClose): каналы + форма → Битрикс24
   YandexMap.tsx         — встроенная Яндекс.Карта (динамический import, no SSR)
+  privacy/page.tsx      — страница «Политика конфиденциальности» (маршрут /privacy)
   api/callback/route.ts — старый Telegram-эндпоинт (не используется, игнорируется при сборке)
 public/
   hero-1.webp, hero-2.webp      — слайды карусели (WebP, ~100KB каждый)
@@ -84,6 +85,7 @@ const MAX_URL = 'https://max.ru/u/f9LHodD0cOJo41JUPgh8J_By2rnO8KkNawBUNBlsW5IYkA
 - **Панель управления:** https://server79.hosting.reg.ru:1500/ (Ispmanager)
 - **Логин панели:** `u3534507`
 - **FTP логин:** `u3534507`
+- **FTP пароль:** `eJewmEO12MO7dfQ1`
 - **Корневая директория сайта:** `/www/xn----7sbatcpotcb4boh9a.xn--p1ai/`
 - **SSL:** Let's Encrypt (настроить в Ispmanager → Сайты → SSL-сертификаты)
 
@@ -104,6 +106,14 @@ const MAX_URL = 'https://max.ru/u/f9LHodD0cOJo41JUPgh8J_By2rnO8KkNawBUNBlsW5IYkA
 - Форма обратного звонка → лид в Битрикс24 CRM (`etmevp.bitrix24.ru`)
 - Адрес в модалках кликабелен — ведёт на Яндекс.Карты (`https://yandex.com/maps/-/CPHKZN13`), выделен голубым с подчёркиванием и стрелкой ↗
 - Часы работы в футере сдвинуты влево и выделены ярче
+- Страница «Политика конфиденциальности» (`/privacy`) — ИП Абкеримов А.Ш., ИНН 911005332108
+- Ссылка на `/privacy` в футере (`.footer-privacy`, прижата вправо через `margin-left: auto`)
+- Чекбокс согласия на обработку ПД в обеих формах (`CallbackModal` и `CallButton`):
+  - по умолчанию не отмечен
+  - кнопка «Жду звонка» визуально серая (`.cm-submit--locked`) до постановки галочки
+  - клик по кнопке без галочки: жёлтая подсветка чекбокса на 1.5 сек + подсказка «Поставьте галочку…»
+  - после постановки галочки подсказка исчезает, кнопка активируется
+  - факт согласия нигде не сохраняется — только UX-барьер
 
 ## CallButton — логика FAB
 
@@ -129,9 +139,19 @@ const MAX_URL = 'https://max.ru/u/f9LHodD0cOJo41JUPgh8J_By2rnO8KkNawBUNBlsW5IYkA
 `app/CallbackModal.tsx` — используется в `HeaderPhoneButton` (и в `StickyCallWidget`). Props: `open`, `phone`, `phoneDisplay`, `onClose`.
 
 Содержит:
-- Левая колонка: каналы связи (Позвонить / WhatsApp / Telegram)
-- Правая колонка: форма «Заказать звонок» (поле телефона → Битрикс24 `crm.lead.add`)
+- Левая колонка: каналы связи (Позвонить / WhatsApp / Telegram / MAX)
+- Правая колонка: форма «Заказать звонок» (поле телефона → чекбокс согласия → кнопка → Битрикс24 `crm.lead.add`)
 - Внизу: часы работы (Пн–Пт 8:00–17:00, Сб 8:00–15:00) и адрес-ссылка на Яндекс.Карты
+
+## Форма согласия на обработку ПД
+
+Обе формы (`CallbackModal.tsx` и `CallButton.tsx`) содержат одинаковый чекбокс:
+
+```
+Я согласен на обработку персональных данных по [Политике конфиденциальности]
+```
+
+Состояния: `consent`, `showHint`, `highlight`. Логика в `handleSubmit` — при `!consent` блокирует отправку и показывает UX-подсказку. CSS-классы: `.cm-consent`, `.cm-consent--highlight`, `.cm-consent-hint`, `.cm-submit--locked`.
 
 ## Оптимизация изображений
 
