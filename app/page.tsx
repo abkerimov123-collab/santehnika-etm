@@ -187,6 +187,7 @@ export default function Home() {
           © 2026 сантехника <LogoIcon size={14} /> етм · Евпатория
         </div>
         <div className="footer-hours">Пн–Пт 8:00–17:00 · Сб 8:00–15:00</div>
+        <a href="/privacy" className="footer-privacy">Политика конфиденциальности</a>
       </footer>
     </>
   )

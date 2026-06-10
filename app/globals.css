@@ -1274,6 +1274,23 @@ footer {
 }
 .footer-copy { font-size: 12px; color: rgba(255,255,255,0.2); }
 .footer-hours { font-size: 12px; color: rgba(255,255,255,0.65); font-weight: 500; }
+.footer-privacy { font-size: 12px; color: rgba(255,255,255,0.25); text-decoration: none; transition: color 0.2s; margin-left: auto; }
+.footer-privacy:hover { color: rgba(255,255,255,0.55); }
+
+/* PRIVACY PAGE */
+.privacy-page { min-height: 100vh; padding: 60px 24px 80px; }
+.privacy-container { max-width: 860px; margin: 0 auto; }
+.privacy-back { display: inline-block; font-size: 13px; color: rgba(255,255,255,0.35); text-decoration: none; margin-bottom: 40px; transition: color 0.2s; }
+.privacy-back:hover { color: rgba(255,255,255,0.65); }
+.privacy-h1 { font-family: var(--font-unbounded), 'Unbounded', sans-serif; font-size: clamp(22px, 3vw, 34px); font-weight: 700; line-height: 1.15; margin-bottom: 20px; }
+.privacy-lead { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.65; margin-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.07); padding-bottom: 32px; }
+.privacy-section { margin-bottom: 36px; }
+.privacy-h2 { font-family: var(--font-unbounded), 'Unbounded', sans-serif; font-size: clamp(13px, 1.4vw, 16px); font-weight: 700; color: rgba(255,255,255,0.85); margin-bottom: 12px; }
+.privacy-section p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.7; margin-bottom: 8px; }
+.privacy-list { list-style: none; padding: 0; margin: 8px 0 0; }
+.privacy-list li { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.7; padding-left: 16px; position: relative; }
+.privacy-list li::before { content: '•'; position: absolute; left: 0; color: rgba(255,255,255,0.25); }
+@media (max-width: 700px) { .footer-privacy { margin-left: 0; } }
 
 /* ANIMATIONS */
 @keyframes fadeIn {
